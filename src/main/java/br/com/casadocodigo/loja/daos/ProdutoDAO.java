@@ -8,15 +8,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.casadocodigo.loja.models.Produto;
 
-@Repository
-@Transactional
+@Repository //mapea o produtoDAO
+@Transactional //indica ao Spring que essa classe é transacional (OBS: importar de..org.springFramework.
 public class ProdutoDAO {
 	
-	@PersistenceContext
-	private EntityManager manager;
+	@PersistenceContext //solicitando ao Spring para injetar o Entity manager na classe e gerencialo
+	private EntityManager manager;//gerenciador das entidades....
 	
 	public void gravar(Produto produto){
-		manager.persist(produto);				
+		manager.persist(produto);		//maneger.persist passando (produto)para ser feito gerenciamento e persistencia		
 	}
 
 }
