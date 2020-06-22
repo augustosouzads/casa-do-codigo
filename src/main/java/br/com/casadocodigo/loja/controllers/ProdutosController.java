@@ -32,7 +32,7 @@ public class ProdutosController {
 	}
 	
 	@RequestMapping("form")
-	public ModelAndView form() {
+	public ModelAndView form(Produto produto) {
 		ModelAndView modelAndView = new ModelAndView("produtos/form");//objeto que manda o objeto para a JSP
 		modelAndView.addObject("tipos", TipoPreco.values());//TipoPreco.values é um metodo que todo enum tem que devolve um array dos valores nele
 															//"tipos" é a chave que agente pega na JSP
@@ -43,7 +43,7 @@ public class ProdutosController {
 	public ModelAndView gravar(@Valid Produto produto, BindingResult result, RedirectAttributes redirectAttributes) {//BindingRresult tras o resutaldo do initBinding que fez a validação dos atributos
 																													 //É preciso anotar a paramettro com @valid e implementar o metodo @initBinding
 		if(result.hasErrors()) {
-			return form();
+			return form(produto);
 		}
 		
 		produtoDao.gravar(produto);
