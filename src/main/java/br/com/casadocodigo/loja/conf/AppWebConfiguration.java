@@ -1,7 +1,9 @@
 package br.com.casadocodigo.loja.conf;
 
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
@@ -19,6 +21,16 @@ public class AppWebConfiguration {
 		resolver.setSuffix(".jsp");
 		
 		return resolver;
+	}
+	@Bean
+	public MessageSource messageSource() {//metodo que cria uma configuração que diz onde esta os arquivos de mensagem de erro  
+		ReloadableResourceBundleMessageSource messageSource // e a retorna.
+			= new ReloadableResourceBundleMessageSource();
+		messageSource.setBasename("/WEB-INF/message");
+		messageSource.setDefaultEncoding("UTF-8");
+		messageSource.setCacheSeconds(1);
+
+		return messageSource;
 	}
 
 }
