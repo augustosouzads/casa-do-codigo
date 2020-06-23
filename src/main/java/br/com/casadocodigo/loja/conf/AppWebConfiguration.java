@@ -4,19 +4,21 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-import org.springframework.core.convert.support.DefaultConversionService;
 import org.springframework.format.datetime.DateFormatter;
 import org.springframework.format.datetime.DateFormatterRegistrar;
 import org.springframework.format.support.DefaultFormattingConversionService;
 import org.springframework.format.support.FormattingConversionService;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import br.com.casadocodigo.loja.controllers.HomeController;
 import br.com.casadocodigo.loja.daos.ProdutoDAO;
+import br.com.casadocodigo.loja.infra.FileSaver;
 
 @EnableWebMvc
-@ComponentScan(basePackageClasses = {HomeController.class,ProdutoDAO.class})
+@ComponentScan(basePackageClasses = {HomeController.class,ProdutoDAO.class,FileSaver.class})
 public class AppWebConfiguration {
 	
 	@Bean
@@ -46,6 +48,12 @@ public class AppWebConfiguration {
 		registrar.registerFormatters(conversionService);//registrando o formato dentro do conversor padrao
 		
 		return conversionService;
+	}
+	
+	@Bean
+	public MultipartResolver multipartResolver() {//metodo que faz a parte de receber arquivos de multiplos formatos..(pdf.jpg etc..)
+		return new StandardServletMultipartResolver();
+		
 	}
 	
 	

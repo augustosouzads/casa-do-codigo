@@ -11,7 +11,7 @@
 </head>
 <body>			<!--na linha de baixo o mvcUrl pega a inicial maiuscula do controller PC"ProdutoController" e depois chama o metodo gravar  -->
 	<form:form action="${s:mvcUrl('PC#gravar').build( )}" method="POST"
-			commandName="produto"> <!--commandName é um parametro que indica que td que estamos -->
+			commandName="produto" enctype="multipart/form-data"><!--commandName é um parametro que indica que td que estamos -->
 		<div>					   <!--trabalhando é referente ao Produto que esta no nosso controller  -->
 			<label>Titulo</label>
 			<form:input path="titulo" />
@@ -39,6 +39,10 @@
 				<form:hidden path="precos[${status.index }].tipo" value="${tipoPreco }" />
 			</div> 
 		</c:forEach>
+		<div>
+			<label>Sumário</label>
+			<input name="sumario" type="file">
+		</div>
 		<button type="submit">Cadastrar</button>
 	</form:form> <!-- a tag form:form é uma tag do Spring que permite que resumimos o codigo -->
 				 <!-- sem precisar colocar "produto." antes do atributo.. Ex <form:errors path="paginas" />-->
