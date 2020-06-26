@@ -40,7 +40,9 @@
 
 					<ul class="clearfix">
 						<li>
-						<a href="/carrinho" rel="nofollow">Carrinho</a>
+						<a href="/carrinho" rel="nofollow">
+						Seu carrinho(${carrinhoCompras.quantidade})</a>
+						
 						</li>
 						<li>
 						<a href="/pages/sobre-a-casa-do-codigo" rel="nofollow">Sobre Nós</a>
@@ -79,7 +81,7 @@
 		</header>
 
 		<section class="buy-options clearfix">
-			<form action="/carrinho/add" method="post" class="container">
+			<form action='<c:url value="/carrinho/add"/>' method="post" class="container">
 				<ul id="variants" class="clearfix">
 					<input type="hidden" value="${produto.id }" name="produtoId"/>
 					<c:forEach items="${produto.precos }" var="preco">
