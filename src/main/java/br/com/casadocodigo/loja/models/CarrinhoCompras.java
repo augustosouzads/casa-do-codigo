@@ -6,13 +6,15 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 
 @Component // anotação generica que disponibiliza a classe como um Bean do Spring
 
-@Scope(value=WebApplicationContext.SCOPE_SESSION)      //Anotação que comfigura a classe para ser instanciada um objeto para cada usuário(servidor)
+@Scope(value=WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)//Anotação que comfigura a classe para ser instanciada um objeto para cada usuário(servidor)
 public class CarrinhoCompras implements Serializable { //Ex: evitar que um usuario em um outro lugar qualquer compre um item e este seja adicionado ao seu "carrinho".					 
 													   //implements Serializable = salva o objeto em arquivo e toda vez que o usuario volta a sessão o ele retorna o objeto salvo.  
 	private static final long serialVersionUID = 1L;
@@ -47,6 +49,12 @@ public class CarrinhoCompras implements Serializable { //Ex: evitar que um usuar
 		for (CarrinhoItem item : itens.keySet()) {
 			total = total.add(getTotal(item));
 		}return total;
+	}
+
+	public void remover(Integer produtoId, TipoPreco tipoPreco) {
+		Produto produto = new Produto();
+		produto.setId(produtoId);
+		itens.remove(new CarrinhoItem(produto, tipoPreco));
 	}
 
 }
