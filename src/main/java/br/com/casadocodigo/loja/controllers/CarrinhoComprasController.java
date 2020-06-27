@@ -19,8 +19,10 @@ import br.com.casadocodigo.loja.models.TipoPreco;
 @Controller
 @RequestMapping("/carrinho")
 @Scope(value=WebApplicationContext.SCOPE_REQUEST)//anotação que configura o controller para atender uma requisição e morrer ao finaliza-la..scopo curto
-public class CarrinhoComprasController {
+public class CarrinhoComprasController implements Serializable{
 		
+
+	private static final long serialVersionUID = 1L;
 
 	@Autowired
 	private ProdutoDAO produtoDAO;
