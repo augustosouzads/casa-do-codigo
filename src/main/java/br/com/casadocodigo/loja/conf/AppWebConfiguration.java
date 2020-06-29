@@ -1,5 +1,11 @@
 package br.com.casadocodigo.loja.conf;
 
+import java.util.concurrent.TimeUnit;
+
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
+import org.springframework.cache.guava.GuavaCacheManager;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -16,6 +22,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import com.google.common.cache.CacheBuilder;
+
 import br.com.casadocodigo.loja.controllers.HomeController;
 import br.com.casadocodigo.loja.daos.ProdutoDAO;
 import br.com.casadocodigo.loja.infra.FileSaver;
@@ -23,6 +31,7 @@ import br.com.casadocodigo.loja.models.CarrinhoCompras;
 
 @EnableWebMvc
 @ComponentScan(basePackageClasses = {HomeController.class,ProdutoDAO.class,FileSaver.class,CarrinhoCompras.class})
+@EnableCaching//anotação para habilitar o Caching(cache)do Spring. -> requer o método public CacheManager
 public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 	
 	@Bean
@@ -63,8 +72,19 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 	}
 	
 	@Bean
-	public RestTemplate restTemplate() {
+	public RestTemplate restTemplate() {//método que habilita a interação do sistema com o protocolo http enviar dados formatados para Json 
 		return new RestTemplate();
+	}
+	
+	@Bean
+	public CacheManager cacheManager() {//metodo que prove o caching (gerente do caching)
+		CacheBuilder<Object, Object> builder = CacheBuilder.newBuilder()//construindo o cache
+				.maximumSize(100)							//configurando o maximo de elementos que guardara o cache	
+				.expireAfterAccess(5, TimeUnit.MINUTES);	//configurando o tempo de expiração do cache	
+		GuavaCacheManager manager = new GuavaCacheManager();
+		manager.setCacheBuilder(builder);//setando o builer no gerente do caching
+		
+		return manager;
 	}
 	
 	@Override
