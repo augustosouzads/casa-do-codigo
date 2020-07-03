@@ -12,8 +12,8 @@ import br.com.casadocodigo.loja.validation.ProdutoValidation;
 public class ServletSpringMVC extends AbstractAnnotationConfigDispatcherServletInitializer{
 
 	@Override
-	protected Class<?>[] getRootConfigClasses() {
-		return null;
+	protected Class<?>[] getRootConfigClasses() {//adicionando SecurityConfiguration no root para que a configuracao de seguranca ja esteja pronta assim que a plicação subir
+		return new Class[] {SecurityConfiguration.class};
 	}
 
 	@Override
