@@ -1,10 +1,11 @@
 package br.com.casadocodigo.loja.conf;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.cache.guava.GuavaCacheManager;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -14,12 +15,15 @@ import org.springframework.format.datetime.DateFormatter;
 import org.springframework.format.datetime.DateFormatterRegistrar;
 import org.springframework.format.support.DefaultFormattingConversionService;
 import org.springframework.format.support.FormattingConversionService;
+import org.springframework.web.accept.ContentNegotiationManager;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.google.common.cache.CacheBuilder;
@@ -40,7 +44,7 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 		resolver.setPrefix("/WEB-INF/views/");
 		resolver.setSuffix(".jsp");
 		
-		resolver.setExposedContextBeanNames("carrinhoCompras");//metodo para expor uma bean do Spring(carrinhoCompras)para a JSP e assim poder ser ivsta pelo JSTL
+		resolver.setExposedContextBeanNames("carrinhoCompras");//metodo para expor uma bean do Spring(carrinhoCompras)para a JSP e assim poder ser vista pelo JSTL
 		
 		return resolver;
 	}
@@ -85,6 +89,19 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 		manager.setCacheBuilder(builder);//setando o builer no gerente do caching
 		
 		return manager;
+	}
+				//content negotiaion é um padrao que foi criado para que a aplicação por si só decida qual formato devolver ao usuario
+	@Bean		//método que resolve qual o conteudo que o usuario deseja(json ou html) 
+	public ViewResolver ContentNegotiationViewResolver(ContentNegotiationManager manager) {
+		List<ViewResolver> viewResolvers = new ArrayList<ViewResolver>();//criando uma lista de ViewResolvers
+		viewResolvers.add(internalResourceViewResolver());//add o metodo InternalResourceViewResolver a lista
+		viewResolvers.add(new JsonViewResolver());//add o metodo JsonViewResolver a lista
+		
+		ContentNegotiatingViewResolver resolver = new ContentNegotiatingViewResolver();//responsavel por resolver qual view vai devolver(html ou json)
+		resolver.setViewResolvers(viewResolvers);//setando uma lista de resolvers para disponibilizar ao ContentNegotiationViewResolver
+		resolver.setContentNegotiationManager(manager);//setando o manager que sera responsavel por decidir quem ele vai retornar na view para o usuario
+		
+		return resolver;
 	}
 	
 	@Override
