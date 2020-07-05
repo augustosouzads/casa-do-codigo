@@ -36,6 +36,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		.antMatchers("/produtos/**").permitAll()//asterisco signigica que vai permitir o acesso do que vem depois de /produtos
 		.antMatchers("/").permitAll()//permitinto o acesso a home
 		.antMatchers("/resources/**").permitAll()//dando permissao ao spring acessar a pasta resources e puxar os arquivos css para formatação da pagina
+		.antMatchers("/pagamento/**").permitAll()
 		.anyRequest().authenticated()
 		.and().formLogin().loginPage("/login").permitAll()
 		.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
