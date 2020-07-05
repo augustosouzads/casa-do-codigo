@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security"%><!-- tag para parte de autenticaçao e segurançao -->
+
 
 <!DOCTYPE html>
 <html>
@@ -29,13 +31,16 @@
 <body>
 
 	<header id="layout-header">
+	<div><label class="clearfix" rel="nofollow">AugustoProject </label></div>
 		<div class="clearfix container">
 			<a href="${contextPath}" id="logo"></a>
 			<div id="header-content">
 				<nav id="main-nav">
 					<ul class="clearfix">
+						<security:authorize access= "hasRole('ROLE_ADMIN')"><!--"isAuthenticated()"> metodo acces mostra os links dentro da tagSecurity somente qdo o usuario estiver autenticado como adimo -->
 						<li><a href="${s:mvcUrl('PC#listar').build()}" rel="nofollow">Lista de Produtos</a></li>
 						<li><a href="${s:mvcUrl('PC#form').build()}" rel="nofollow">Cadastro de Produtos</a></li>
+						</security:authorize>
 						<li><a href="${s:mvcUrl('CCC#itens').build()}" rel="nofollow">Carrinho</a></li>
 						<li><a href="/pages/sobre-a-casa-do-codigo" rel="nofollow">Sobre Nós</a></li>
 						<!-- <li><a href="/pages/perguntas-frequentes" rel="nofollow">Perguntas Frequentes</a></li>  -->
