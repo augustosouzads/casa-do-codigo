@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
 import br.com.casadocodigo.loja.daos.UsuarioDAO;
@@ -36,7 +37,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		.antMatchers("/").permitAll()//permitinto o acesso a home
 		.antMatchers("/resources/**").permitAll()//dando permissao ao spring acessar a pasta resources e puxar os arquivos css para formatação da pagina
 		.anyRequest().authenticated()
-		.and().formLogin();
+		.and().formLogin().loginPage("/login").permitAll()
+		.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
 	}
 	
 	@Override

@@ -34,7 +34,7 @@
 	<div><label class="clearfix" rel="nofollow">AugustoProject </label></div>
 		<div class="clearfix container">
 			<a href="${contextPath}" id="logo"></a>
-			<div id="header-content">
+		     <div id="header-content">
 				<nav id="main-nav">
 					<ul class="clearfix">
 						<security:authorize access= "hasRole('ROLE_ADMIN')"><!--"isAuthenticated()"> metodo acces mostra os links dentro da tagSecurity somente qdo o usuario estiver autenticado como adimo -->
@@ -42,7 +42,8 @@
 						<li><a href="${s:mvcUrl('PC#form').build()}" rel="nofollow">Cadastro de Produtos</a></li>
 						</security:authorize>
 						<li><a href="${s:mvcUrl('CCC#itens').build()}" rel="nofollow">Carrinho</a></li>
-						<li><a href="/pages/sobre-a-casa-do-codigo" rel="nofollow">Sobre Nós</a></li>
+			        	<li><a href="${s:mvcUrl('LC#loginForm').build()}">Entrar</a></li>
+						<!-- <li><a href="/pages/sobre-a-casa-do-codigo" rel="nofollow">Sobre Nós</a></li> -->
 						<!-- <li><a href="/pages/perguntas-frequentes" rel="nofollow">Perguntas Frequentes</a></li>  -->
 					</ul>
 				</nav>

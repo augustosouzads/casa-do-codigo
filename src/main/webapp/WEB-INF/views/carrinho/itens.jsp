@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %><!--tag do Spring para tratar das msg de erro-->
+
 
 <!DOCTYPE html>
 <html>
@@ -105,10 +107,10 @@
 			<tfoot>
 				<tr>
 					<td colspan="3">
-					  <form action="${s:mvcUrl('PC#finalizar').build() }" method="post">
-					 	  <input type="submit" class="checkout" name="checkout"
+					  <form:form action="${s:mvcUrl('PC#finalizar').build() }" method="post">
+					 	  <input type="submit" cssClass="checkout" path="checkout"
 					 	      value="Finalizar compra" id="checkout"/>
-					  </form>
+					  </form:form>
 					</td>					
 					<td class="numeric-cell">${carrinhoCompras.total }</td><td></td>
 				</tr>

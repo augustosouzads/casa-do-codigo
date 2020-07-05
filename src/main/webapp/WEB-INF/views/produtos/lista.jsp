@@ -45,6 +45,12 @@
        	Usuário: ${usuario.username }
        </a></li>
       </ul>
+      <ul class="nav navbar-collapse navbar-right">
+        <li><a href="${s:mvcUrl('LC#logout').build()}">
+       	<security:authentication property="principal" var="usuario"/><!-- principal é o nome padrao do usuaruario que esta logado atualmente -->
+       	Sair da conta de ${usuario.nome }
+       </a></li>
+       </ul>
     </div><!-- /.navbar-collapse -->
   </div>
 </nav>
