@@ -2,9 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security"%><!-- tag para parte de autenticaçao e segurançao -->
+<%@ taglib tagdir="/WEB-INF/tags" prefix="tags" %>
 
-<%@include file="/WEB-INF/views/cabecalho.jsp" %>
-
+<tags:pageTemplate titulo="Livros de Java,Android, IOS, Mobile, e muito mais">
 	<section id="index-section" class="container middle">
 		<h1 class="cdc-call">Últimos dias com os preços promocionais. Aproveite!</h1>
 		
@@ -53,15 +53,7 @@
 				</p>
 			</li>
 		</ul>
-
-
-
 	</section>
+</tags:pageTemplate>
 
-<%@include file="/WEB-INF/views/rodape.jsp" %>
-
-	
-
-</body>
-</html>
 
