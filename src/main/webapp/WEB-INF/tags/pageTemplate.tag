@@ -1,6 +1,7 @@
 <%@ tag language="java" pageEncoding="UTF-8"%>
 <%@ attribute name="titulo" required="true"%>
 <%@ attribute name="bodyClass" required="false" %>
+<%@ attribute name= "extraScripts" fragment="true" %>
 
 
     <!DOCTYPE html>
@@ -42,6 +43,7 @@
 <link href="https://cdn.rawgit.com/alura-cursos/spring-mvc-i-criando-aplicacoes-web-master/master/src/main/webapp/resources/css/produtos.css" rel="stylesheet" type="text/css"  media="all"  />    
 <link href="https://cdn.rawgit.com/alura-cursos/spring-mvc-i-criando-aplicacoes-web-master/master/src/main/webapp/resources/css/book-collection.css" rel="stylesheet" type="text/css"  media="all"  />
 <link href="https://cdn.rawgit.com/alura-cursos/spring-mvc-i-criando-aplicacoes-web-master/master/src/main/webapp/resources/css/checkout-style.css" rel="stylesheet" type="text/css"  media="all"  />    
+
 <body class="${bodyClass }">
 
 <%@include file="/WEB-INF/views/cabecalho.jsp" %>
@@ -49,6 +51,8 @@
 <jsp:doBody />
 
 <%@include file="/WEB-INF/views/rodape.jsp" %>
+
+<jsp:invoke fragment="extraScripts"></jsp:invoke>
 
 </body>
 </html>
