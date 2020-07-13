@@ -19,10 +19,14 @@ import org.springframework.web.accept.ContentNegotiationManager;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
+import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.i18n.CookieLocaleResolver;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
@@ -52,7 +56,7 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 	public MessageSource messageSource() {//metodo que cria uma configuração que diz onde esta os arquivos de mensagem de erro  
 		ReloadableResourceBundleMessageSource messageSource // e a retorna.
 			= new ReloadableResourceBundleMessageSource();
-		messageSource.setBasename("/WEB-INF/message");
+		messageSource.setBasename("/WEB-INF/messages");
 		messageSource.setDefaultEncoding("UTF-8");
 		messageSource.setCacheSeconds(1);
 
@@ -109,6 +113,15 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 	    configurer.enable();
 	}
 	
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {//mretodo para adicionar um interceptador na requisição para traduzir a pagina quando clicar no idioma escolhido na tela da aplicacação
+		registry.addInterceptor(new LocaleChangeInterceptor());
+	}
+	
+	@Bean
+	public LocaleResolver localeResolver() {//para evitar que o usuario precise toda hora clicar no idioma para traduir a pagina da aplicação :metodo para automatizar atravez do cookie da session
+		return new CookieLocaleResolver();
+	}
 	
 
 }

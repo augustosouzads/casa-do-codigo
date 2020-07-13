@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import javax.persistence.Embeddable;
 
 @Embeddable //anotação informando ao Spring que objeto preço sera parte do produto
-public class preco {
+public class Preco {
 	
 	private BigDecimal valor;
 	private TipoPreco tipo;
