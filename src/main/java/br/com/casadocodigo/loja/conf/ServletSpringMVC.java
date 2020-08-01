@@ -6,12 +6,10 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration.Dynamic;
 
-import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
 import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
-
-import br.com.casadocodigo.loja.validation.ProdutoValidation;
 
 public class ServletSpringMVC extends AbstractAnnotationConfigDispatcherServletInitializer{
 
@@ -35,7 +33,7 @@ public class ServletSpringMVC extends AbstractAnnotationConfigDispatcherServletI
 		CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter();
 		encodingFilter.setEncoding("UTF-8");
 		
-		return new Filter[] {encodingFilter};
+		return new Filter[] {encodingFilter, new OpenEntityManagerInViewFilter()};//OpenEnTMan... é um filtro que serve para resolver o problema de laizy(Permitindo o Spring deixar o entit manager aberto e carregar a tabela de Preços tardia"element collection"
 	}
 	
 	@Override

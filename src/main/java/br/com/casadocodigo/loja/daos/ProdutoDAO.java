@@ -25,7 +25,7 @@ public class ProdutoDAO {
 	}
 
 	public List<Produto> listar() {
-		return manager.createQuery("select p from Produto p", Produto.class).getResultList();//metodo que retorna uma lista de produtos
+		return manager.createQuery("select distinct(p) from Produto p join fetch p.precos", Produto.class).getResultList();//metodo que retorna uma lista de produtos
 	}
 
 	public Produto find(Integer id) {//metodo usando uma Planed Query(query planejada)

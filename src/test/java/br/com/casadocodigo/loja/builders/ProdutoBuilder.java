@@ -15,7 +15,6 @@ public class ProdutoBuilder {
 
     private ProdutoBuilder(Produto produto) {
         produtos.add(produto);
-
     }
 
     public static ProdutoBuilder newProduto(TipoPreco tipoPreco, BigDecimal valor) {
