@@ -3,11 +3,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %><!--tag do Spring para tratar das msg de erro-->
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %><!--tag do Spring que permite ele gerenciar o controller atraves da url (colocando o prefixo "s") -->
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Livro de Java, Android, iPhone, Ruby, PHP e muito mais -  Casa do Coódigo</title>
+<title>Login page</title>
 
 <c:url value="/resources/css" var="cssPath"/>
 <link rel="stylesheet" href="${cssPath }/bootstrap.min.css">
@@ -18,7 +19,6 @@
 		padding-bottom: 60px;
 	}
 </style>
-
 </head>
 <body>	
 

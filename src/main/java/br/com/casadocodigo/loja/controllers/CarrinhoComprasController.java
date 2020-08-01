@@ -41,8 +41,9 @@ public class CarrinhoComprasController implements Serializable{
 	}
 	@RequestMapping(method=RequestMethod.GET)
 	public ModelAndView itens() {
+		
 		return new ModelAndView("carrinho/itens");
-		}
+	}
 
 	private CarrinhoItem criaItem(Integer produtoId, TipoPreco tipoPreco) {
 		Produto produto = produtoDAO.find(produtoId);
