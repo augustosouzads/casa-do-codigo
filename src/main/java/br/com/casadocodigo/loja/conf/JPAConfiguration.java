@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class JPAConfiguration { //classe onde vamos implementar os metodos EntityManagerFactory responsavel pela criação do EntityManager que ira gerenciar nossas entidades.
 	
 	@Bean
-	public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, Properties aditionalProperties) {
 		LocalContainerEntityManagerFactoryBean factoryBean =
 				new LocalContainerEntityManagerFactoryBean();//objeto onde colocamos as configurações do EntityManager para o Spring poder crialo
 		factoryBean.setPackagesToScan("br.com.casadocodigo.loja.models");//dznzd ao hibernate onde procurar por nossas models (entidade)
@@ -27,12 +27,14 @@ public class JPAConfiguration { //classe onde vamos implementar os metodos Entit
 
 		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter(); //HibernateJpaVendorAdapter é uma classe que implementa a interface JpaVendorAdapter
 		factoryBean.setJpaVendorAdapter(vendorAdapter);	//Setar qual implementação do JPA que esta sendo utilizado 
-		factoryBean.setJpaProperties(aditionalProperties());//adicionando as propriedades ao FactoryBean
+		factoryBean.setJpaProperties(aditionalProperties);//adicionando as propriedades ao FactoryBean
 		
 		return factoryBean;
 	}
 
-	private Properties aditionalProperties() {
+	@Bean
+	@Profile("dev")
+	public Properties aditionalProperties() {
 		Properties props = new Properties();//configurando propriedades do hibernate
 		props.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");//dialeto que sera usado na nossa aplicação (conversar com MYSQL)
 		props.setProperty("hibernate.show_sql", "true");//propriedade para podermos ver o SQL gerado pelo hibernate
