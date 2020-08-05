@@ -40,5 +40,4 @@ public class JPAProductionConfiguration {
 		
 		return dataSource;
 	}
-
 }
