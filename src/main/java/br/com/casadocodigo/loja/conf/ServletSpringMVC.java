@@ -43,11 +43,11 @@ public class ServletSpringMVC extends AbstractAnnotationConfigDispatcherServletI
 		registration.setMultipartConfig(new MultipartConfigElement(""));//esse metodo diz que queremos que do jeito que recebemos o arquivo ele devera ser enviado ao servidor.
 	}
 	
-//	@Override
-//	public void onStartup(ServletContext servletContext) throws ServletException {//metodo de inicialização que ao iniciarmos a aplicaçãoi diz ao Spring que o perfil que iremos utilizar é o de dev.
-//		super.onStartup(servletContext);
-//		servletContext.addListener(RequestContextListener.class);//addicionando um listener do Spring (RequestContextListener)
-//		servletContext.setInitParameter("spring.profiles.active", "dev");//setando parametro inicial dizendo que o profile ativo da aplicação é o dev
-//	}
+	@Override
+	public void onStartup(ServletContext servletContext) throws ServletException {//metodo de inicialização que ao iniciarmos a aplicaçãoi diz ao Spring que o perfil que iremos utilizar é o de dev.
+		super.onStartup(servletContext);
+		servletContext.addListener(RequestContextListener.class);//addicionando um listener do Spring (RequestContextListener)
+		servletContext.setInitParameter("spring.profiles.active", "dev");//setando parametro inicial dizendo que o profile ativo da aplicação é o dev
+	}
 
 }
