@@ -19,7 +19,7 @@ public class JPAProductionConfiguration {
 	private Environment environment;//[interface do Spring] que já é carregada na inicialização da aplicação e injeta o Spring o ambiente para nós o ambiente que estamos trabalhando"
 		
 	@Bean
-	public Properties aditionalProperties() {
+	public Properties additionalProperties() {
 		Properties props = new Properties();//configurando propriedades do hibernate
 		props.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");//dialeto que sera usado na nossa aplicação (conversar com PostgreSQL)
 		props.setProperty("hibernate.show_sql", "true");//propriedade para podermos ver o SQL gerado pelo hibernate

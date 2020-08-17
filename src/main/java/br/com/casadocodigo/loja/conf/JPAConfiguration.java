@@ -34,7 +34,7 @@ public class JPAConfiguration { //classe onde vamos implementar os metodos Entit
 
 	@Bean
 	@Profile("dev")
-	public Properties aditionalProperties() {
+	public Properties additionalProperties() {
 		Properties props = new Properties();//configurando propriedades do hibernate
 		props.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");//dialeto que sera usado na nossa aplicação (conversar com MYSQL)
 		props.setProperty("hibernate.show_sql", "true");//propriedade para podermos ver o SQL gerado pelo hibernate
